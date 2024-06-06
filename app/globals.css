@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+@font-face {
+  font-family: poppins;
+  src: url(./components/poppins/Poppins-Medium.ttf);
+}
+@font-face {
+  font-family: poppins-light;
+  src: url(./components/poppins/Poppins-Light.ttf);
+}
+
+
+.footer {
+  background: linear-gradient(112deg, #FE3B1F 0%, #1F93C7 44%, #0E9AD4 65%, #C028B9 100%) 0% 0% no-repeat padding-box
+}
+
+.poppins-Bold {
+  font-family: poppins, sans-serif; 
+}
+
+.poppins-regular {
+  font-family: poppins-light, sans-serif; 
+}
+
+
+.polycab-header{
+ color: transparent linear-gradient(180deg, #C028B9 0%, #00A0DF 100%) 0% 0% no-repeat !important;
+}
+
+
+/*  */
+
+
+.marker {
+  position: relative;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid red; /* You can change the color or adjust the size as needed */
+  background: transparent linear-gradient(180deg, #C028B9 0%, #00A0DF 100%) 0% 0% no-repeat padding-box;
+  opacity: 1;
+}
+
+.marker-inner {
+  position: absolute;
+  top: -15px;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: 2px solid red; /* You can change the color or adjust the size as needed */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  .bg{
+    background-image: url("/images/BG.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+  }
+
+  .marker-inner {
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 2px solid red; /* You can change the color or adjust the size as needed */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .map {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .mapMainContainer {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    width: 80%;
+    margin: auto;
+  }
+  
+  .buttonWrapper {
+    display: flex;
+    padding-bottom: 10px;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  
+  .backButton {
+    height: 40px;
+    font-size: 14px;
+  }
+  
+
+  .common-bg{
+    background: transparent linear-gradient(180deg, #C028B9 0%, #00A0DF 100%)
+  }
+  .custom-border{
+
+    border-top-color:linear-gradient(180deg, #C028B9 0%, #00A0DF 100%);
+    border-top-width: 8px;
+    border-right-width: 4px;
+    border-left-width: 4px;
+    border-right-color: transparent;
+    border-left-color: transparent;
+
+    }
