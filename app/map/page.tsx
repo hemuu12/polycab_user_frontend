@@ -28,7 +28,7 @@ const Map = ({
    const [factories , setFactories]=useState<any[]>([]);
 
    const handleZoomIn = () => {
-      setZoomLevel((prevZoomLevel) => prevZoomLevel + 0.5);
+      setZoomLevel((prevZoomLevel) => prevZoomLevel + 0.1);
    };
 
    const handleZoomOut = () => {

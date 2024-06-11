@@ -1,4 +1,4 @@
-// File: /home/pahadi/Desktop/polycab-frontend-page-router/polycab_user_frontend/app/layout.tsx
+// File: /home/pahadi/Desktop/polycab-frontend-app-router/polycab_user_frontend/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

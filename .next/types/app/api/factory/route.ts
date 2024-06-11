@@ -1,4 +1,4 @@
-// File: /home/pahadi/Desktop/polycab-frontend-page-router/polycab_user_frontend/app/api/factory/route.js
+// File: /home/pahadi/Desktop/polycab-frontend-app-router/polycab_user_frontend/app/api/factory/route.js
 import * as entry from '../../../../../app/api/factory/route.js'
 import type { NextRequest } from 'next/server.js'
 

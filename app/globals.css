@@ -146,3 +146,8 @@
     .content{
      background:  linear-gradient(180deg, #C028B9 1%, #00A0DF 100%)
     }
+
+
+    .hovercontent:hover + .content {
+      opacity: 1;
+    }
