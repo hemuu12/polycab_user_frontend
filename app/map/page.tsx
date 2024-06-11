@@ -14,13 +14,6 @@ export type MapPropType = {
    onClick: (value: string) => void,
 }
 
-const cityCoordinates = {
-   Mumbai: { latitude: "19°02′11.11", longitude: "72°51′34.09″" },
-   Delhi: { latitude: 28.6139, longitude: 77.209 },
-   Bangalore: { latitude: 12.9716, longitude: 77.5946 },
-   Kolkata: { latitude: 22.5726, longitude: 88.3639 },
-   Chennai: { latitude: 13.0827, longitude: 80.2707 },
- };
 
 const Map = ({
    className = 'svgmap',
@@ -35,7 +28,7 @@ const Map = ({
    const [factories , setFactories]=useState<any[]>([]);
 
    const handleZoomIn = () => {
-      setZoomLevel((prevZoomLevel) => prevZoomLevel + 0.1);
+      setZoomLevel((prevZoomLevel) => prevZoomLevel + 0.5);
    };
 
    const handleZoomOut = () => {
@@ -84,7 +77,7 @@ const Map = ({
    return (
       <div className="flex items-center justify-center h-screen">
 
-                  <div className='z-10 flex gap-20'>
+                  <div className='z-10 flex gap-2'>
                      
                   {
                      factories?.map((factory, index) => (
@@ -115,8 +108,8 @@ const Map = ({
                </svg>
             </div>
             <div className="absolute bottom-0 left-0 m-4 flex space-x-4">
-               <button className='border border-gray-500 p-1 text-2xl' onClick={handleZoomIn}>+</button>
-               <button className='border border-gray-500 p-1 text-2xl' onClick={handleZoomOut}>-</button>
+               <button className=' border-gray-500 w-5  text-2xl' onClick={handleZoomIn}>+</button>
+               <button className='border-gray-500 p-1 text-2xl' onClick={handleZoomOut}>-</button>
             </div>
          </div>
       </div>

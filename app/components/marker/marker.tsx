@@ -1,59 +1,42 @@
-import { BiLocationPlus } from "react-icons/bi";
-import { FaLocationPin } from "react-icons/fa6";
+import React from 'react';
+import { IoLocationSharp } from 'react-icons/io5';
 
-const CustomMarker = ({ key, lat, lng, factory }) => {
+const convertBufferToImage = (imageData) => {
+  if (!imageData) {
+    return null;
+  }
+  const uint8Array = new Uint8Array(imageData.data);
+  const blob = new Blob([uint8Array], { type: imageData.type });
+  const imageUrl = URL.createObjectURL(blob);
+  return imageUrl;
+};
 
-  const convertBufferToImage = (imageData) => {
-    if (!imageData) {
-      return null;
-    }
-    const uint8Array = new Uint8Array(imageData.data);
-    const blob = new Blob([uint8Array], { type: imageData.type });
-    const imageUrl = URL.createObjectURL(blob);
-    return imageUrl;
-  };
+const CustomMarker = ({ factory }) => {
   return (
-    <>
-    <div className="absolute transform -translate-x-1/4 -translate-y-full cursor-pointer" style={{ top: `${lat}px`, left: `${lng}px` }}>
-      <div className="relative w-8 h-14 flex flex-col items-center">
-        <div className="common-bg w-8 h-8 rounded-full flex items-center justify-center z-10">
-          <div className="w-5 h-5 bg-white  rounded-full object-fill"><img className="w-5 h-5  rounded-full" src={convertBufferToImage(factory.featuredImage)} alt={factory.name}/></div>
+    <div className="absolute z-40 w-[10px] h-[400px] ml-[50px] cursor-pointer group">
+      <div className="w-5 z-40 h-5 bg-white rounded-full object-fill">
+        <img className="w-5 h-5 rounded-full cursor-pointer group" src={convertBufferToImage(factory.featuredImage)} alt={factory.name} />
+      </div>
+      
+      {/* hover content */}
+      <div className="content z-50  rounded-xl bottom-0 left-0 w-[300px] bg-[#1F93C7] text-white p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="w-[275px]">
+          <img src={factory.shortVideo} alt="" />
         </div>
-        <div className="w-0 h-0 border-t-8 border-t-red-500  border-r-4 border-r-transparent border-l-4 border-l-transparent custom-border"></div>
+        <div className="mt-5">
+          <h3>{factory.name}</h3>
+          <div className="flex items-center mt-1">
+            <IoLocationSharp size={18} color="white" />
+            <p className="ml-1 text-xs">{factory.address}</p>
+          </div>
+          <p className="text-xs mt-2 text-wrap">{factory.description}</p>
+          <div className="mt-4">
+            <button className="bg-white text-[#FE3B1F] text-sm px-4 py-2 rounded-full">View Tour</button>
+          </div>
+        </div>
       </div>
     </div>
-    {/* hover content */}
-    <div className="bg-\">
-      <div><img src="" alt="" /></div>
-      <div>
-        <h3>location</h3>
-        <div>
-          <FaLocationPin color="white"/>
-          <h5>location</h5>
-        </div>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora quo laboriosam neque consectetur aliquid dicta, tempore voluptatum facilis aut sequi, similique ipsum eum nemo sint, necessitatibus cumque quasi repellendus exercitationem.</p>
-        <div><button>View Tour</button></div>
-      </div>
-
-    </div>
-    </>
   );
 };
 
 export default CustomMarker;
-
-
-
-
-
-
-
-{/* <div className="absolute transform -translate-x-1/4 -translate-y-full cursor-pointer" style={{ top: `${lat}px`, left: `${lng}px` }}>
-<div className="relative w-8 h-14 flex flex-col items-center">
-  <div className="common-bg w-8 h-8 rounded-full flex items-center justify-center z-10">
-    <div className="w-5 h-5 bg-white rounded-full">{img}</div>
-  </div>
-  <div className="w-0 h-0 border-t-8 border-t-red-500 common-bg border-r-4 border-r-transparent border-l-4 border-l-transparent"></div>
-</div>
-</div>
-//  */}
