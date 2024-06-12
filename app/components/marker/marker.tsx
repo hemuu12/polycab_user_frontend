@@ -13,21 +13,25 @@ const convertBufferToImage = (imageData) => {
 
 export const imgdata=[
   {image:"./images/U4.png"},
-  {image:"./images/U7.png"}
+  {image:"./images/U7.png"},
+  // {image:"./images/U4-2.png"},
+  // {image:"./images/U6.png"},
+  // {image:"./images/U8.png"}
 ]
 const getRandomImage = () => {
   const randomIndex = Math.floor(Math.random() * imgdata.length);
   return imgdata[randomIndex].image;
 };
 
-const CustomMarker = ({ factory }) => {
+const CustomMarker = ({ factory , key}:any) => {
 
   const randomImage = getRandomImage();
 
+  console.log(factory ,"11111111111111111" )
   return (
-    <div className="absolute z-40 w-[200px] h-[400px] ml-[50px] cursor-pointer group ">
-      <div className="hovercontent  w-5 z-40 h-5 bg-white rounded-full object-fill">
-        <img className="w-10 h-10 rounded-full cursor-pointer group" src={randomImage} alt={factory.name} />
+    <div key={key} className="absolute z-40 w-[200px] h-[400px] ml-[50px] mt-24 cursor-pointer group ">
+      <div className="hovercontent  w-[80px] z-[200px] rounded-full object-fill">
+        <img className="w-[100%] rounded-full " src={randomImage} alt={factory.name} />
       </div>
       
       {/* hover content */}

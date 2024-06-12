@@ -14,7 +14,6 @@ export type MapPropType = {
    onClick: (value: string) => void,
 }
 
-
 const Map = ({
    className = 'svgmap',
    size = constants.WIDTH,
@@ -24,15 +23,39 @@ const Map = ({
    hoverColor = constants.HOVERCOLOR,
    onClick,
 }: MapPropType) => {
-   const [zoomLevel, setZoomLevel] = useState(1);
-   const [factories , setFactories]=useState<any[]>([]);
+   const [zoomLevel, setZoomLevel] = useState(0.9);
+   const [factories, setFactories] = useState<any[]>([]);
+   const [transform, setTransform] = useState({ x: 0, y: 0 });
+   const [hasZoomed, setHasZoomed] = useState(false); // Track if the map has already zoomed
 
    const handleZoomIn = () => {
       setZoomLevel((prevZoomLevel) => prevZoomLevel + 0.1);
    };
 
    const handleZoomOut = () => {
-      setZoomLevel((prevZoomLevel) => Math.max(prevZoomLevel - 0.1, 0.1));
+      setZoomLevel(0.9);
+   };
+
+   const handleMapClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+      if (hasZoomed) return; // If already zoomed, return
+
+      const svg = event.currentTarget;
+      const rect = svg.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      // Calculate the transform to center the clicked position
+      const newTransformX = -(x - rect.width / 2) * (zoomLevel + 0.2 - zoomLevel);
+      const newTransformY = -(y - rect.height / 2) * (zoomLevel + 0.2 - zoomLevel);
+
+      setTransform((prevTransform) => ({
+         x: prevTransform.x + newTransformX,
+         y: prevTransform.y + newTransformY,
+      }));
+
+      // Zoom in on first click
+      setZoomLevel((prevZoomLevel) => prevZoomLevel + 0.2);
+      setHasZoomed(true); // Set the state to true after zooming
    };
 
    const mapStyle = {
@@ -41,6 +64,8 @@ const Map = ({
       fill: mapColor,
       stroke: strokeColor,
       strokeWidth: strokeWidth,
+      transform: `translate(${transform.x}px, ${transform.y}px) scale(${zoomLevel})`,
+      transformOrigin: 'center center',
    }
 
    const handleMouseEnter = (hoverStateId: string) => {
@@ -57,7 +82,6 @@ const Map = ({
       }
    }
 
-
    useEffect(() => {
       const fetchData = async () => {
         try {
@@ -68,26 +92,17 @@ const Map = ({
           console.error('Error fetching factories:', error);
         }
       };
-  
+
       fetchData();
     }, []);
 
-    console.log(factories,"dataaaaaaaaaaaaaaaaaaa")
-
    return (
-      <div className="flex items-center justify-center h-screen">
-
-                  <div className='z-10 flex gap-2'>
-                     
-                  {
-                     factories?.map((factory, index) => (
-                        <div key={index} >
-                        <CustomMarker key={index} lat={factory.latitude} lng={factory.longitude} factory={factory} />
-                        </div>
-                     ))
-                  }
-</div>   
-         <div className="relative">
+      <div className="flex items-center justify-center h-auto">
+         <div className='absolute top-22 left-20 m-4 flex space-x-4 z-20'>
+            <button className='border-gray-500 p-1 text-2xl' onClick={handleZoomIn}>+</button>
+            <button className='border-gray-500 p-1 text-2xl' onClick={handleZoomOut}>-</button>
+         </div>
+         <div className="relative overflow-hidden w-full h-3/4 flex items-center justify-center">
             <div className={className} style={mapStyle}>
                <svg
                   version='1.1'
@@ -95,6 +110,7 @@ const Map = ({
                   x='0px'
                   y='0px'
                   viewBox='-114 -50.4 611.9 695.7'
+                  onClick={handleMapClick}
                >
                   {stateCodes.map((stateCode) => (
                      <path
@@ -106,10 +122,16 @@ const Map = ({
                      />
                   ))}
                </svg>
-            </div>
-            <div className="absolute bottom-0 left-0 m-4 flex space-x-4">
-               <button className=' border-gray-500 w-5  text-2xl' onClick={handleZoomIn}>+</button>
-               <button className='border-gray-500 p-1 text-2xl' onClick={handleZoomOut}>-</button>
+               <div className="absolute top-14 left-2 w-full h-full cursor-pointer z-[200px] flex gap-2">
+                  {factories?.map((factory, index) => (
+                     <CustomMarker
+                        key={index}
+                        lat={factory.latitude}
+                        lng={factory.longitude}
+                        factory={factory}
+                     />
+                  ))}
+               </div>
             </div>
          </div>
       </div>
@@ -117,20 +139,3 @@ const Map = ({
 }
 
 export default Map;
-
-
-
-// import React from 'react'
-// import "../globals.css"
-// import ChoroplethMapDrillDown from '../components/marker/geoMap'
-// const Map= () => {
-//   return (
-//     <div>
-//       <ChoroplethMapDrillDown/>
-
-
-//     </div>
-//   )
-// }
-
-// export default Map
