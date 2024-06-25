@@ -151,3 +151,56 @@
     .hovercontent:hover + .content {
       opacity: 1;
     }
+
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: transparent;
+  box-shadow: none;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+}
+
+.custom-popup .leaflet-popup-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+}
+
+.custom-popup .content {
+  background-color: #1F93C7;
+  border-radius: 12px;
+  color: white;
+  padding: 15px;
+  width: 300px;
+}
+
+.custom-popup .content img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.custom-popup .content h3 {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.custom-popup .content .flex {
+  margin-top: 10px;
+}
+
+.custom-popup .content .text-xs {
+  margin-top: 10px;
+}
+
+.custom-popup .content button {
+  margin-top: 10px;
+  background-color: white;
+  color: #FE3B1F;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
